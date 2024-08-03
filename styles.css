@@ -33,7 +33,12 @@ table {
     margin: 20px auto;
     border-collapse: collapse;
 }
-
+#timer {
+    font-size: 24px;
+    margin: 20px 0;
+    color: white;
+    font-weight: bold;
+}
 td {
     width: 40px;
     height: 40px;
@@ -76,7 +81,7 @@ input {
     border: none;
     outline: none;
     background-color: rgb(255, 255, 255);
-    color: blue;
+    color: rgb(0, 0, 0);
 }
 
 input[readonly] {
