@@ -1,5 +1,7 @@
 let currentLevel = 0;
 let isNextLevelButtonActive = false;
+let timerInterval;
+let startTime;
 
 const sampleProblems = [
     [
@@ -56,6 +58,8 @@ function createSudokuBoard() {
 
         table.appendChild(row);
     }
+
+    startTimer();  // Start the timer when the board is created
 }
 
 function validateInput(input) {
@@ -74,6 +78,7 @@ function submitAnswer() {
 
     if (checkUserAnswer()) {
         alert("Congratulations! Puzzle solved");
+        stopTimer();  // Stop the timer when the puzzle is solved
         isNextLevelButtonActive = true;
         document.getElementById("nextLevelBtn").classList.add("active");
     } else {
@@ -115,6 +120,22 @@ function resetBoard() {
     sudokuBoard = [];
     const table = document.getElementById("sudokuBoard");
     table.innerHTML = "";
+}
+
+function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateTimer() {
+    const elapsedTime = Date.now() - startTime;
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+    document.getElementById("timer").textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 function solveSudoku(board) {
